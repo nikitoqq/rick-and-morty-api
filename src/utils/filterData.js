@@ -1,10 +1,10 @@
-export const filterData = {
-  status: {
+export const filterData = [
+  {
     name: "status",
-    filter: ["Alive", "Dead", "Unknown"],
+    data: ["Alive", "Dead", "Unknown"],
   },
-  type: {
+  {
     name: "type",
-    filter: ["Alien", "Human"],
+    data: ["Alien", "Human"],
   },
-};
+];

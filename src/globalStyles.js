@@ -1,4 +1,3 @@
-import { FormatColorFill } from "@mui/icons-material";
 import { GlobalStyles } from "@mui/material";
 
 export const GlobalStyle = () => (
@@ -10,7 +9,7 @@ export const GlobalStyle = () => (
         border: 0,
         boxSizing: "border-box",
       },
-      "body" : {
+      body: {
         backgroundColor: "#272b33",
       },
     }}
