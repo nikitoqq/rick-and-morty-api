@@ -6,6 +6,7 @@ import {
   CardMedia,
   CardContent,
 } from "@mui/material";
+import { NavLink } from "react-router";
 
 export const CharacterCard = styled(Card)`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -23,14 +24,16 @@ export const CharacterContent = styled(CardContent)`
   padding: 20px;
 `;
 
-export const CharacterLink = styled(Link)`
+export const CharacterLocation = styled(Typography)`
   text-decoration: none;
   color: white;
   font-size: 18px;
   
 `;
 
-export const CharacterLinkName = styled(CharacterLink)`
+export const CharacterLinkName = styled(NavLink)`
+  text-decoration: none;
+  color: white;
   font-size: 27px;
   font-weight: 800;
 `;

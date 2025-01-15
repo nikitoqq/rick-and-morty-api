@@ -1,12 +1,11 @@
-import { CardContent } from "@mui/material";
 import {
   CharacterCard,
-  CharacterLink,
   CharacterLinkName,
   CharacterTypography,
   CharacterTypographyStatus,
   Image,
   CharacterContent,
+  CharacterLocation,
 } from "./style";
 
 export const Card = ({ character }) => {
@@ -14,14 +13,14 @@ export const Card = ({ character }) => {
     <CharacterCard key={character.id}>
       <Image image={character.image} title={`${character.name} image`} />
       <CharacterContent>
-        <CharacterLinkName>{character.name}</CharacterLinkName>
+        <CharacterLinkName to={"/Character"}>{character.name}</CharacterLinkName>
         <CharacterTypographyStatus>
           {character.status}-{character.species}
         </CharacterTypographyStatus>
         <CharacterTypography>Last known location:</CharacterTypography>
-        <CharacterLink>{character.lastLocation}</CharacterLink>
+        <CharacterLocation>{character.lastLocation}</CharacterLocation>
         <CharacterTypography>First seen in:</CharacterTypography>
-        <CharacterLink>{character.firstSeen}</CharacterLink>
+        <CharacterLocation>{character.firstSeen}</CharacterLocation>
       </CharacterContent>
     </CharacterCard>
   );

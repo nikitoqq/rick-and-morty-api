@@ -7,20 +7,19 @@ export const HeaderComponent = () => {
   const [isCheck, setIsCheck] = useState(false);
 
   const clickCheck = () => {
-    setIsCheck(!isCheck)
-  }
-  const headerElement = [
-    "Home",
-    "Setting",
-    <FilterIcon onClick={clickCheck} />,
-  ];
+    setIsCheck(!isCheck);
+  };
+  const headerElement = ["Home", "Setting"];
 
   const headerMap = headerElement.map((elem) => {
-    return <HeaderLink>{elem}</HeaderLink>;
+    return <HeaderLink to={elem === "Home" ? "" : elem}>{elem}</HeaderLink>;
   });
   return (
     <HeaderAppBar>
-      <HeaderBox>{headerMap}</HeaderBox>
+      <HeaderBox>
+        {headerMap}
+        <FilterIcon onClick={clickCheck} />
+      </HeaderBox>
       <Filter isCheck={isCheck} filterData={filterData} />
     </HeaderAppBar>
   );

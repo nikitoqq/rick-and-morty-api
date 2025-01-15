@@ -1,7 +1,7 @@
 import { HeaderComponent } from "../HeaderComponent";
 import { Main } from "./style";
 
-export const WrapperPage = ({ children }) => {
+export const Layout = ({ children }) => {
   return (
     <>
       <HeaderComponent />

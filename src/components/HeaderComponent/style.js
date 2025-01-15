@@ -1,5 +1,6 @@
 import { FilterAlt } from "@mui/icons-material";
-import { AppBar, Link, styled, Box } from "@mui/material";
+import { AppBar, styled, Box } from "@mui/material";
+import { NavLink } from "react-router";
 
 export const HeaderAppBar = styled(AppBar)`
   display: flex;
@@ -8,7 +9,7 @@ export const HeaderAppBar = styled(AppBar)`
   padding: 10px;
 `;
 
-export const HeaderLink = styled(Link)`
+export const HeaderLink = styled(NavLink)`
   text-decoration: none;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
