@@ -5,10 +5,10 @@ export const FilterBox = styled(Box)`
   flex-direction: column;
   justify-content: space-around;
   width: 350px;
-  height: 200px;
+  height: 210px;
   background-color: #3c3e44;
   position: fixed;
-  top: 7%;
+  top: 2.5rem;
   right: 10vw;
   padding: 10px 20px;
 `;

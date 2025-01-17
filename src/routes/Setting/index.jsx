@@ -1,20 +1,24 @@
+import { useDispatch } from "react-redux";
+
 import { Switch } from "@mui/material";
 import { SettingMainBox, SettingMainRowBox, SettingTypography } from "./styled";
-import { useState } from "react";
+
+import { changeTheme } from "../../toolkitRedux/toolkitSlice";
 
 export const Setting = () => {
-
-    const [Theme, setTheme] = useState("Black")
-
-    const switchChange = () => {
-        setTheme()
-    }
+  const dispatch = useDispatch();
 
   return (
     <SettingMainBox>
       <SettingMainRowBox>
         <SettingTypography>Change Theme</SettingTypography>
-        <Switch onChange={switchChange}/>
+        <Switch
+          onChange={(e) => {
+            dispatch(
+              changeTheme(e.target.checked === false ? "dark" : "light")
+            );
+          }}
+        />
       </SettingMainRowBox>
     </SettingMainBox>
   );

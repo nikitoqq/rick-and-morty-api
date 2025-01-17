@@ -1,20 +1,40 @@
-import { useState } from "react";
-
-import { FilterBox, FilterLabels, FilterName } from "./style";
+import { useDispatch } from "react-redux";
 import { Box, Radio, RadioGroup } from "@mui/material";
 
-export const Filter = ({ filterData, isCheck }) => {
-  const [value, SetValue] = useState("");
+import { FilterBox, FilterLabels, FilterName } from "./style";
 
-  const setFilter = (event) => {
-    alert(event.target.value)
+import {
+  addFilterStatus,
+  addFilterType,
+} from "../../toolkitRedux/toolkitSlice";
+
+export const Filter = ({ filterData, isCheck }) => {
+  const dispatch = useDispatch();
+
+  const setState = (filterName, elem) => {
+    if (filterName === "status") {
+      dispatch(addFilterStatus(elem));
+    } else if (filterName === "type") {
+      dispatch(addFilterType(elem));
+    }
   };
 
   const getRaioMap = (filter) => {
-    return filter.data.map((elem, index) => (
-      <FilterLabels key={index} control={<Radio key={index} value={elem} onClick={setFilter}/>} label={elem} />
+    return filter.data.map((elem) => (
+      <FilterLabels
+        key={elem}
+        control={
+          <Radio
+            key={elem}
+            onClick={() => setState(filter.name, elem)}
+            value={elem}
+          />
+        }
+        label={elem}
+      />
     ));
   };
+
   const filterMap = filterData.map((filter, index) => {
     return (
       <Box key={index}>

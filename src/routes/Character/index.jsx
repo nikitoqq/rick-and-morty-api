@@ -11,12 +11,9 @@ import {
 } from "./style";
 
 export const Character = ({ characters }) => {
+  
   const episodesMap = characters.episode.map((episode) => {
-    return (
-      <>
-        {`${episode}, `}
-      </>
-    );
+    return <>{`${episode}, `}</>;
   });
   return (
     <CharacterBox>
@@ -27,6 +24,7 @@ export const Character = ({ characters }) => {
             <CharacterName>{characters.name}</CharacterName>
             <CharacterDescription>
               Status: {characters.status}
+              {}
             </CharacterDescription>
             <CharacterDescription>Type: {characters.type}</CharacterDescription>
             <CharacterDescription>

@@ -23,9 +23,7 @@ export const HeaderComponent = () => {
       <HeaderBox>
         {headerMap}
         <FilterIcon
-          sx={
-            isCheck ? {border: "1px solid white"} : null
-          }
+          sx={isCheck ? { border: "1px solid white" } : null}
           onClick={clickCheck}
         />
       </HeaderBox>

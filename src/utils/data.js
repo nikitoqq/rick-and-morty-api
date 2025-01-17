@@ -1,7 +1,9 @@
 import axios from "axios";
 
-export const getAllCharacter = (page) => {
-  return axios(`https://rickandmortyapi.com/api/character?page=${page}`);
+export const getAllCharacter = (page, filter) => {
+  const status = filter.status.payload === "none" ? '' : filter.status.payload
+  const type = filter.type.payload === "none" ? '' : filter.type.payload
+  return axios(`https://rickandmortyapi.com/api/character?page=${page}&species=${type || ''}&status=${status || ''}`)
 };
 
 export const getAllEpisode = () => {
