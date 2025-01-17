@@ -1,31 +1,29 @@
-export const characters = [
-  {
-    id: 48,
-    name: "Black Rick",
-    status: "Alive",
-    species: "Human",
-    type: "",
-    gender: "Male",
-    origin: { name: "unknown", url: "" },
-    location: {
-      name: "Citadel of Ricks",
-      url: "https://rickandmortyapi.com/api/location/3",
-    },
-    image: "https://rickandmortyapi.com/api/character/avatar/48.jpeg",
-    episode: [
-      "https://rickandmortyapi.com/api/episode/22",
-      "https://rickandmortyapi.com/api/episode/28",
-    ],
-    url: "https://rickandmortyapi.com/api/character/48",
-    created: "2017-11-05T11:15:26.044Z",
-  },
-    {
-      id: 568,
-      name: "Slut Dragon",
-      image: "https://rickandmortyapi.com/api/character/avatar/568.jpeg",
-      status: "Alive",
-      species: "Mythological Creature",
-      lastLocation: "Draygon",
-      firstSeen: "Claw and Hoarder: Special Ricktim`s Morty",
-    },
-  ];
+import axios from "axios";
+
+export const getAllCharacter = (page) => {
+  return axios(`https://rickandmortyapi.com/api/character?page=${page}`);
+};
+
+export const getAllEpisode = () => {
+  return getData("https://rickandmortyapi.com/api/episode");
+};
+
+export const getAllLocation = () => {
+  return getData("https://rickandmortyapi.com/api/location");
+};
+
+export const getEpisode = (url) => {
+  return axios(url);
+}
+
+const getData = async (url) => {
+  let data = "",
+    page = 1,
+    results = [];
+  do {
+    data = await axios(`${url}?page=${page}`);
+    results = results.concat(data.data.results);
+    page++;
+  } while (data.data.info.pages >= page);
+  return results;
+};

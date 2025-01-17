@@ -26,11 +26,11 @@ export const Character = ({ characters }) => {
           <Box>
             <CharacterName>{characters.name}</CharacterName>
             <CharacterDescription>
-              Stasus: {characters.status}
+              Status: {characters.status}
             </CharacterDescription>
             <CharacterDescription>Type: {characters.type}</CharacterDescription>
             <CharacterDescription>
-              Genger: {characters.gender}
+              Gender: {characters.gender}
             </CharacterDescription>
           </Box>
         </CharacterAboutBox>

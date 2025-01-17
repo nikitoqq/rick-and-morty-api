@@ -11,14 +11,23 @@ export const HeaderComponent = () => {
   };
   const headerElement = ["Home", "Setting"];
 
-  const headerMap = headerElement.map((elem) => {
-    return <HeaderLink to={elem === "Home" ? "" : elem}>{elem}</HeaderLink>;
+  const headerMap = headerElement.map((elem, index) => {
+    return (
+      <HeaderLink key={index} to={elem === "Home" ? "" : elem}>
+        {elem}
+      </HeaderLink>
+    );
   });
   return (
     <HeaderAppBar>
       <HeaderBox>
         {headerMap}
-        <FilterIcon onClick={clickCheck} />
+        <FilterIcon
+          sx={
+            isCheck ? {border: "1px solid white"} : null
+          }
+          onClick={clickCheck}
+        />
       </HeaderBox>
       <Filter isCheck={isCheck} filterData={filterData} />
     </HeaderAppBar>

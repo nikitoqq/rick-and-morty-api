@@ -25,6 +25,8 @@ export const HeaderBox = styled(Box)`
 `;
 
 export const FilterIcon = styled(FilterAlt)`
-  width: 20px;
-  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  border-radius: 25%;
+  padding: 2px;
 `;

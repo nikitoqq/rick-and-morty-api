@@ -6,18 +6,18 @@ import { Box, Radio, RadioGroup } from "@mui/material";
 export const Filter = ({ filterData, isCheck }) => {
   const [value, SetValue] = useState("");
 
-  const handleChange = (event) => {
-    SetValue(event.target.value);
+  const setFilter = (event) => {
+    alert(event.target.value)
   };
 
   const getRaioMap = (filter) => {
-    return filter.data.map((elem) => (
-      <FilterLabels value={elem} control={<Radio />} label={elem} />
+    return filter.data.map((elem, index) => (
+      <FilterLabels key={index} control={<Radio key={index} value={elem} onClick={setFilter}/>} label={elem} />
     ));
   };
-  const filterMap = filterData.map((filter) => {
+  const filterMap = filterData.map((filter, index) => {
     return (
-      <Box>
+      <Box key={index}>
         <FilterName>{filter.name}</FilterName>
         <RadioGroup
           row

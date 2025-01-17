@@ -1,24 +1,16 @@
-import { Home } from "./routes/Home";
 import { Layout } from "./components/Layout";
+import { RoutesApp } from "./components/RoutesApp";
 import { GlobalStyle } from "./globalStyles";
-import { Setting } from "./routes/Setting";
-import { Character } from "./routes/Character";
-import { characters } from "./utils/data";
-import { Route, Routes } from "react-router";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 export const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Layout>
-        <Routes>
-          <Route index element={<Home />} />
-          <Route
-            path="/Character"
-            element={<Character characters={characters[0]} />}
-          />
-          <Route path="/Setting" element={<Setting />} />
-        </Routes>
-      </Layout>
+      <QueryClientProvider client={queryClient}>
+        <Layout children={<RoutesApp />}/>
+      </QueryClientProvider>
     </>
   );
 };
