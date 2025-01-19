@@ -26,7 +26,7 @@ export const Filter = ({ filterData, isCheck }) => {
         control={
           <Radio
             key={elem}
-            onClick={() => setState(filter.name, elem)}
+            onClick={() => setState(filter.name, elem === "none" ? "" : elem)}
             value={elem}
           />
         }

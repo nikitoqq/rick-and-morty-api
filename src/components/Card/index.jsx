@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { getEpisode } from "../../utils/data";
+import { getFirstEpisode } from "../../utils/data";
 
 import {
   CharacterCard,
@@ -14,7 +14,12 @@ import {
 } from "./style";
 
 export const Card = ({ character }) => {
-  const { data } = useQuery("Seen", () => getEpisode(character.episode[0]));
+  //change query type
+  const { data, isLoading } = useQuery("Seen", () => getFirstEpisode(character.episode[0]));
+
+  if (isLoading) {
+    return <></>;
+  }
 
   const statusColor = () => {
     if (character.status === "Alive") {
@@ -30,7 +35,7 @@ export const Card = ({ character }) => {
     <CharacterCard key={character.id}>
       <Image image={character.image} title={`${character.name} image`} />
       <CharacterContent>
-        <CharacterLinkName to={"/Character"}>
+        <CharacterLinkName to={"/Character/" + character.id}>
           {character.name}
         </CharacterLinkName>
         <StatusBox>

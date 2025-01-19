@@ -45,5 +45,11 @@ export const CharacterOtherInformation = styled(Box)`
 export const CharacterOtherInformationDescription = styled(
   CharacterDescription
 )`
-  margin-top: 40px;
+  margin-top: 30px;
+`;
+
+export const CharacterCreatedInformationDescription = styled(
+  CharacterOtherInformationDescription
+)`
+  font-size: 26px;
 `;

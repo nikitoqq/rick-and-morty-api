@@ -1,4 +1,4 @@
-import { Box, styled, Typography } from "@mui/material";
+ import { Box, styled, Typography } from "@mui/material";
 
 export const SettingMainBox = styled(Box)`
   display: flex;

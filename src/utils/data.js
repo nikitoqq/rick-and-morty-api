@@ -1,31 +1,24 @@
 import axios from "axios";
 
-export const getAllCharacter = (page, filter) => {
-  const status = filter.status.payload === "none" ? '' : filter.status.payload
-  const type = filter.type.payload === "none" ? '' : filter.type.payload
-  return axios(`https://rickandmortyapi.com/api/character?page=${page}&species=${type || ''}&status=${status || ''}`)
-};
+export const getAllCharacter = async (page, filter) =>
+  axios(
+    `https://rickandmortyapi.com/api/character?page=${page}&species=${
+      filter.type.payload || ""
+    }&status=${filter.status.payload || ""}`
+  );
 
-export const getAllEpisode = () => {
-  return getData("https://rickandmortyapi.com/api/episode");
-};
+export const getCharacterById = async (id) =>
+  axios(`https://rickandmortyapi.com/api/character/${id}`);
 
-export const getAllLocation = () => {
-  return getData("https://rickandmortyapi.com/api/location");
-};
-
-export const getEpisode = (url) => {
+export const getFirstEpisode = (url) => {
   return axios(url);
-}
+};
 
-const getData = async (url) => {
-  let data = "",
-    page = 1,
-    results = [];
-  do {
-    data = await axios(`${url}?page=${page}`);
-    results = results.concat(data.data.results);
-    page++;
-  } while (data.data.info.pages >= page);
-  return results;
+export const getEpisode = async (urls) => {
+  let res = [];
+  for (let url in urls) {
+    const { data } = await axios(urls[url]);
+    res.push(data);
+  }
+  return res;
 };

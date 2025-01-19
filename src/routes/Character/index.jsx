@@ -7,14 +7,32 @@ import {
   CharacterName,
   CharacterOtherInformation,
   CharacterOtherInformationDescription,
+  CharacterCreatedInformationDescription,
   Image,
 } from "./style";
+import { useQuery } from "react-query";
+import { getCharacterById } from "../../utils/data";
+import { useParams } from "react-router";
+import { Episodes } from "../../components/Episodes";
+import { GetFullDate } from "../../utils/utils";
 
-export const Character = ({ characters }) => {
-  
-  const episodesMap = characters.episode.map((episode) => {
-    return <>{`${episode}, `}</>;
-  });
+export const Character = () => {
+  const params = useParams();
+
+  const { data, isLoading } = useQuery("characterId", () =>
+    getCharacterById(params.id)
+  );
+
+  if (isLoading) {
+    return <></>;
+  }
+
+  const characters = data.data;
+
+ const created = GetFullDate(new Date(characters.created))
+
+
+
   return (
     <CharacterBox>
       <CharacterFlexBox>
@@ -41,11 +59,11 @@ export const Character = ({ characters }) => {
           Location: {characters.location.name}
         </CharacterOtherInformationDescription>
         <CharacterOtherInformationDescription>
-          episodes: {episodesMap}
+          Episodes: <Episodes episodes={characters.episode} />
         </CharacterOtherInformationDescription>
-        <CharacterOtherInformationDescription>
-          created: {characters.created}
-        </CharacterOtherInformationDescription>
+        <CharacterCreatedInformationDescription>
+          Created: {created}
+        </CharacterCreatedInformationDescription>
       </CharacterOtherInformation>
     </CharacterBox>
   );

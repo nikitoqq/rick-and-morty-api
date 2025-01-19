@@ -10,10 +10,7 @@ export const RoutesApp = () => {
     //Посмотреть как в реакт роут созранять данные и переносить по юрл ссылке
     <Routes>
       <Route index element={<Home />} />
-      <Route
-        path="/Character"
-        element={<Character />}
-      />
+      <Route path={"/Character/:id"} element={<Character/>} />
       <Route path="/Setting" element={<Setting />} />
     </Routes>
   );
