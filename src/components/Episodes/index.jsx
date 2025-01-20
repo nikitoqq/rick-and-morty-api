@@ -3,7 +3,7 @@ import { getEpisode } from "../../utils/data";
 import { EpisodesTypography } from "./style";
 
 export const Episodes = ({ episodes }) => {
-  const { data, isLoading } = useQuery("Episode", () => getEpisode(episodes));
+  const { data, isLoading } = useQuery(["Episode", episodes], () => getEpisode(episodes));
 
   if (isLoading) {
     return <></>;

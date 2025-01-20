@@ -12,42 +12,48 @@ import {
   CharacterLocation,
   StatusBox,
 } from "./style";
+import { useSelector } from "react-redux";
+import { statusColor } from "../../utils/utils";
 
 export const Card = ({ character }) => {
-  //change query type
-  const { data, isLoading } = useQuery("Seen", () => getFirstEpisode(character.episode[0]));
+  const { data, isLoading } = useQuery(["Seen", character], () =>
+    getFirstEpisode(character.episode[0])
+  );
 
+  const theme = useSelector((state) => state.themes.themes);
+  
   if (isLoading) {
     return <></>;
   }
 
-  const statusColor = () => {
-    if (character.status === "Alive") {
-      return { backgroundColor: "#55cc44" };
-    } else if (character.status === "Dead") {
-      return { backgroundColor: "#d63d2e" };
-    } else {
-      return { backgroundColor: "#9e9e9e" };
-    }
-  };
-
   return (
-    <CharacterCard key={character.id}>
+    <CharacterCard sx={{ backgroundColor: theme.main }} key={character.id}>
       <Image image={character.image} title={`${character.name} image`} />
       <CharacterContent>
-        <CharacterLinkName to={"/Character/" + character.id}>
+        <CharacterLinkName
+          sx={{ color: theme.light }}
+          to={"/Character/" + character.id}
+        >
           {character.name}
         </CharacterLinkName>
         <StatusBox>
-          <Circle sx={statusColor} />
-          <CharacterTypographyStatus>
+          <Circle sx={() => statusColor(character.status)} />
+          <CharacterTypographyStatus color={theme.light}>
             {character.status}-{character.species}
           </CharacterTypographyStatus>
         </StatusBox>
-        <CharacterTypography>Last known location:</CharacterTypography>
-        <CharacterLocation>{character.location.name}</CharacterLocation>
-        <CharacterTypography>First seen in:</CharacterTypography>
-        <CharacterLocation>{data?.data.name}</CharacterLocation>
+        <CharacterTypography color={theme.contrastText}>
+          Last known location:
+        </CharacterTypography>
+        <CharacterLocation color={theme.light}>
+          {character.location.name}
+        </CharacterLocation>
+        <CharacterTypography color={theme.contrastText}>
+          First seen in:
+        </CharacterTypography>
+        <CharacterLocation color={theme.light}>
+          {data?.data.name}
+        </CharacterLocation>
       </CharacterContent>
     </CharacterCard>
   );

@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Radio, RadioGroup } from "@mui/material";
 
 import { FilterBox, FilterLabels, FilterName } from "./style";
@@ -6,9 +6,10 @@ import { FilterBox, FilterLabels, FilterName } from "./style";
 import {
   addFilterStatus,
   addFilterType,
-} from "../../toolkitRedux/toolkitSlice";
+} from "../../features/filter/filterSlice";
 
-export const Filter = ({ filterData, isCheck }) => {
+export const Filter = ({ filterData, filterDisplay }) => {
+  const themeState = useSelector((state) => state.themes.themes);
   const dispatch = useDispatch();
 
   const setState = (filterName, elem) => {
@@ -38,7 +39,7 @@ export const Filter = ({ filterData, isCheck }) => {
   const filterMap = filterData.map((filter, index) => {
     return (
       <Box key={index}>
-        <FilterName>{filter.name}</FilterName>
+        <FilterName color={themeState.light}>{filter.name}</FilterName>
         <RadioGroup
           row
           aria-labelledby="demo-row-radio-buttons-group-label"
@@ -51,7 +52,12 @@ export const Filter = ({ filterData, isCheck }) => {
   });
 
   return (
-    <FilterBox sx={{ display: isCheck ? "flex" : "none" }}>
+    <FilterBox
+      sx={{
+        bgcolor: themeState.main,
+        display: filterDisplay ? "flex" : "none",
+      }}
+    >
       {filterMap}
     </FilterBox>
   );

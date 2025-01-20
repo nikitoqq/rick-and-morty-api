@@ -10,11 +10,12 @@ import {
   pageDecrement,
   pageIncrement,
   pageReset,
-} from "../../toolkitRedux/toolkitSlice";
+} from "../../features/page/pageSlice";
 
 export const Home = () => {
-  const page = useSelector((state) => state.toolkit.page);
-  const filter = useSelector((state) => state.toolkit.filter);
+  const page = useSelector((state) => state.page.page);
+  const filter = useSelector((state) => state.filter.filter);
+  const themeState = useSelector((state) => state.themes.themes);
   const dispatch = useDispatch();
 
   const { data, isLoading, isError } = useQuery(["character", page, filter.status.payload, filter.type.payload], () =>
@@ -37,12 +38,14 @@ export const Home = () => {
       {characterMap}
       <PaginationBox>
         <PaginationButton
+        sx={{bgcolor: themeState.main, color: themeState.contrastText}}
           disabled={page === 1 ? true : false}
           onClick={() => dispatch(pageDecrement())}
         >
           Prev
         </PaginationButton>
-        <PaginationButton
+        <PaginationButton 
+        sx={{bgcolor: themeState.main, color: themeState.contrastText}}
           onClick={() =>
             page === data.data.info.pages
               ? dispatch(pageReset())

@@ -10,12 +10,9 @@ import {
 import { NavLink } from "react-router";
 
 export const CharacterCard = styled(Card)`
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   display: flex;
   width: 600px;
   height: 220px;
-  background-color: #3c3e44;
   margin: 13.5px;
   border-radius: 0.5rem;
 `;
@@ -28,13 +25,11 @@ export const CharacterContent = styled(CardContent)`
 
 export const CharacterLocation = styled(Typography)`
   text-decoration: none;
-  color: white;
   font-size: 18px;
 `;
 
 export const CharacterLinkName = styled(NavLink)`
   text-decoration: none;
-  color: white;
   font-size: 27px;
   font-weight: 800;
   line-height: 25px;
@@ -42,16 +37,13 @@ export const CharacterLinkName = styled(NavLink)`
 `;
 
 export const CharacterTypography = styled(Typography)`
-  color: #9e9e9e;
   font-size: 16px;
   font-weight: 500;
   margin-top: 0.6rem;
 `;
 
 export const CharacterTypographyStatus = styled(Typography)`
-  color: #9e9e9e;
   font-size: 16px;
-  color: white;
   font-weight: 500;
 `;
 
@@ -90,7 +82,6 @@ export const PaginationButton = styled(Button)`
   width: 80px;
   height: 100%;
   background-color: #9e9e9e;
-  color: white;
   border-radius: 0.5rem;
   margin: 0px 20px;
 `;

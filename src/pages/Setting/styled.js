@@ -25,8 +25,5 @@ export const SettingMainRowBox = styled(Box)`
 `;
 
 export const SettingTypography = styled(Typography)`
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    color: white;
     font-size: 18px;
 `;

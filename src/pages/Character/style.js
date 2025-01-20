@@ -25,15 +25,13 @@ export const CharacterAboutBox = styled(Box)`
 `;
 export const CharacterDescription = styled(Typography)`
   font-size: 30px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 600;
-  color: white;
   margin-left: 20px;
 `;
 
 export const CharacterName = styled(CharacterDescription)`
   font-size: 64px;
+  line-height: 70px;
   margin-bottom: 20px;
 `;
 

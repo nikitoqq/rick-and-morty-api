@@ -15,8 +15,10 @@ import { getCharacterById } from "../../utils/data";
 import { useParams } from "react-router";
 import { Episodes } from "../../components/Episodes";
 import { GetFullDate } from "../../utils/utils";
+import { useSelector } from "react-redux";
 
 export const Character = () => {
+  const themeState = useSelector((state) => state.themes.themes);
   const params = useParams();
 
   const { data, isLoading } = useQuery("characterId", () =>
@@ -29,9 +31,7 @@ export const Character = () => {
 
   const characters = data.data;
 
- const created = GetFullDate(new Date(characters.created))
-
-
+  const created = GetFullDate(new Date(characters.created));
 
   return (
     <CharacterBox>
@@ -39,29 +39,28 @@ export const Character = () => {
         <Image image={characters.image} title={`${characters.name} image`} />
         <CharacterAboutBox>
           <Box>
-            <CharacterName>{characters.name}</CharacterName>
-            <CharacterDescription>
+            <CharacterName color={themeState.light}>{characters.name}</CharacterName>
+            <CharacterDescription color={themeState.light}>
               Status: {characters.status}
-              {}
             </CharacterDescription>
-            <CharacterDescription>Type: {characters.type}</CharacterDescription>
-            <CharacterDescription>
+            <CharacterDescription color={themeState.light}>Type: {characters.type}</CharacterDescription>
+            <CharacterDescription color={themeState.light}>
               Gender: {characters.gender}
             </CharacterDescription>
           </Box>
         </CharacterAboutBox>
       </CharacterFlexBox>
       <CharacterOtherInformation>
-        <CharacterOtherInformationDescription>
+        <CharacterOtherInformationDescription color={themeState.light}>
           Origin name: {characters.origin.name}
         </CharacterOtherInformationDescription>
-        <CharacterOtherInformationDescription>
+        <CharacterOtherInformationDescription color={themeState.light}>
           Location: {characters.location.name}
         </CharacterOtherInformationDescription>
-        <CharacterOtherInformationDescription>
+        <CharacterOtherInformationDescription color={themeState.light}>
           Episodes: <Episodes episodes={characters.episode} />
         </CharacterOtherInformationDescription>
-        <CharacterCreatedInformationDescription>
+        <CharacterCreatedInformationDescription color={themeState.light}>
           Created: {created}
         </CharacterCreatedInformationDescription>
       </CharacterOtherInformation>
