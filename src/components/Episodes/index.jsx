@@ -14,7 +14,7 @@ export const Episodes = ({ episodes }) => {
   }
 
   const episodeMap = data.map((episode) => (
-    <EpisodesTypography>{`Episode ${episode.id}: ${episode.name} `}</EpisodesTypography>
+    <EpisodesTypography key={episode.id}>{`Episode ${episode.id}: ${episode.name} `}</EpisodesTypography>
   ));
   return <>{episodeMap}</>;
 };
