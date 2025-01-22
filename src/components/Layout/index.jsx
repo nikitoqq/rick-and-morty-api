@@ -10,7 +10,7 @@ import { Main } from "./style";
 export const Layout = () => {
   return (
     <>
-      <AppHeader/>
+      <AppHeader />
       <Main>
         <Routes>
           <Route index element={<Home />} />

@@ -1,7 +1,4 @@
-export const headerLink = ["Home", "Setting"];
-
-export const GetFullDate = (date) =>
-  `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
+import axios from "axios";
 
 export const statusColor = (status) => {
   if (status === "Alive") {
@@ -23,3 +20,17 @@ export const filterData = [
     data: ["none", "Alien", "Human"],
   },
 ];
+
+export const GetFullDate = (date) =>
+  `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
+
+export const headerLink = ["Home", "Setting"];
+
+export const isOnline = async () => {
+  try {
+    await axios("hhtps://google.com");
+    return true;
+  } catch {
+    return false;
+  }
+};

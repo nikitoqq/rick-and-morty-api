@@ -1,18 +1,16 @@
 import axios from "axios";
 
 export const getAllCharacter = async (page, filter) =>
-  axios(
+  await axios(
     `https://rickandmortyapi.com/api/character?page=${page}&species=${
-      filter.type.payload || ""
-    }&status=${filter.status.payload || ""}`
+      filter.type || ""
+    }&status=${filter.status || ""}`
   );
 
 export const getCharacterById = async (id) =>
-  axios(`https://rickandmortyapi.com/api/character/${id}`);
+  await axios(`https://rickandmortyapi.com/api/character/${id}`);
 
-export const getFirstEpisode = (url) => {
-  return axios(url);
-};
+export const getFirstEpisode = async (url) => await axios(url);
 
 export const getEpisode = async (urls) => {
   let res = [];

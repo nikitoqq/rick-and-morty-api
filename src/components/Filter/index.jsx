@@ -6,10 +6,10 @@ import { FilterBox, FilterLabels, FilterName } from "./style";
 import {
   addFilterStatus,
   addFilterType,
-} from "../../features/filter/filterSlice";
+} from "../../features/filter";
 
 export const Filter = ({ filterData, filterDisplay }) => {
-  const themeState = useSelector((state) => state.themes.themes);
+  const themeState = useSelector((state) => state.persistedReducer.themes.themes);
   const dispatch = useDispatch();
 
   const setState = (filterName, elem) => {

@@ -1,16 +1,49 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { filterSlice } from "./filter/filterSlice";
-import { filterDisplaySlice } from "./filterDisplay/filterDisplay";
-import { pageSlice } from "./page/pageSlice";
-import { themeSlice } from "./theme/themeSlice";
+import storage from "redux-persist/lib/storage";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import { filterSlice } from "./filter";
+import { filterDisplaySlice } from "./filterDisplay";
+import { pageSlice } from "./page";
+import { themeSlice } from "./theme";
+import { settingInputSlice } from "./settingInput";
+import { characterPageSlice } from "./characterPage";
 
-const rootReducer = combineReducers({
+const persistConfig = {
+  key: "userSetting",
+  storage,
+};
+
+const persistedCombineReducer = combineReducers({
+  settingInput: settingInputSlice.reducer,
+  themes: themeSlice.reducer,
+  characterPage: characterPageSlice.reducer,
+});
+
+const otherReducer = combineReducers({
   filter: filterSlice.reducer,
   filterDisplay: filterDisplaySlice.reducer,
   page: pageSlice.reducer,
-  themes: themeSlice.reducer,
 });
 
+const persistedReducer = persistReducer(persistConfig, persistedCombineReducer);
+
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: { persistedReducer, otherReducer },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
+
+export const persistor = persistStore(store);

@@ -4,7 +4,6 @@ import { NavLink } from "react-router";
 
 export const HeaderAppBar = styled(AppBar)`
   display: flex;
-  justify-content: space-around;
   padding: 10px;
 `;
 
@@ -18,6 +17,9 @@ export const HeaderBox = styled(Box)`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0px auto;
 `;
 
 export const FilterIcon = styled(FilterAlt)`

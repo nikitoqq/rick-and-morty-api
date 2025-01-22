@@ -7,26 +7,33 @@ export const CharacterBox = styled(Box)`
 
 export const CharacterFlexBox = styled(Box)`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
   width: 100%;
 `;
 
 export const Image = styled(CardMedia)`
-  min-width: 400px;
+  width: 100%;
+  height: 100%;
+`;
+
+export const ImageWrapper = styled(Box)`
   height: 400px;
-  margin: 0px 20px;
+  width: 400px;
+  margin: 0px 20px 40px 20px;
 `;
 
 export const CharacterAboutBox = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0px 20px 40px 20px;
 `;
+
 export const CharacterDescription = styled(Typography)`
   font-size: 30px;
   font-weight: 600;
-  margin-left: 20px;
 `;
 
 export const CharacterName = styled(CharacterDescription)`
@@ -43,7 +50,7 @@ export const CharacterOtherInformation = styled(Box)`
 export const CharacterOtherInformationDescription = styled(
   CharacterDescription
 )`
-  margin-top: 30px;
+  margin-left: 20px;
 `;
 
 export const CharacterCreatedInformationDescription = styled(

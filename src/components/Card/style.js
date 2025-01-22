@@ -11,16 +11,19 @@ import { NavLink } from "react-router";
 
 export const CharacterCard = styled(Card)`
   display: flex;
+  flex-direction: row;
   width: 600px;
-  height: 220px;
+  min-height: 220px;
   margin: 13.5px;
   border-radius: 0.5rem;
+  flex-wrap: wrap;
 `;
 
 export const CharacterContent = styled(CardContent)`
   display: flex;
   flex-direction: column;
   padding: 10px 20px;
+  flex-grow: 1;
 `;
 
 export const CharacterLocation = styled(Typography)`
@@ -30,7 +33,7 @@ export const CharacterLocation = styled(Typography)`
 
 export const CharacterLinkName = styled(NavLink)`
   text-decoration: none;
-  font-size: 27px;
+  font-size: 1.6rem;
   font-weight: 800;
   line-height: 25px;
   margin-bottom: 4px;
@@ -48,9 +51,13 @@ export const CharacterTypographyStatus = styled(Typography)`
 `;
 
 export const Image = styled(CardMedia)`
-  height: 100%;
-  min-width: 229.2px;
-  font-weight: 500;
+  min-height: 220px;
+  background-position: center;
+`;
+
+export const ImageWrapper = styled(Box)`
+  flex-grow: 1;
+  min-width: 220px;
 `;
 
 export const Circle = styled(Box)`

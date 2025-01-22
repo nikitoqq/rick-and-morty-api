@@ -6,27 +6,24 @@ import { Card } from "../../components/Card";
 import { BoxStyled } from "./style";
 import { PaginationBox, PaginationButton } from "../../components/Card/style";
 import { getAllCharacter } from "../../utils/data";
-import {
-  pageDecrement,
-  pageIncrement,
-  pageReset,
-} from "../../features/page/pageSlice";
+import { pageDecrement, pageIncrement, pageReset } from "../../features/page";
 
 export const Home = () => {
-  const page = useSelector((state) => state.page.page);
-  const filter = useSelector((state) => state.filter.filter);
-  const themeState = useSelector((state) => state.themes.themes);
+  const pageState = useSelector((state) => state.otherReducer.page.page);
+  const filterState = useSelector((state) => state.otherReducer.filter.filter);
+  const themeState = useSelector((state) => state.persistedReducer.themes.themes);
   const dispatch = useDispatch();
-
-  const { data, isLoading, isError } = useQuery(["character", page, filter.status.payload, filter.type.payload], () =>
-    getAllCharacter(page, filter)
+  const { data, isLoading } = useQuery(
+    [
+      "character",
+      pageState,
+      filterState,
+    ],
+    () => getAllCharacter(pageState, filterState)
   );
 
   if (isLoading) {
     return <div>Data is loading...</div>;
-  }
-  if (isError) {
-    return <div>data is loaring error</div>;
   }
 
   const characterMap = data.data.results.map((character) => (
@@ -38,16 +35,16 @@ export const Home = () => {
       {characterMap}
       <PaginationBox>
         <PaginationButton
-        sx={{bgcolor: themeState.main, color: themeState.contrastText}}
-          disabled={page === 1 ? true : false}
+          sx={{ bgcolor: themeState.main, color: themeState.contrastText }}
+          disabled={pageState === 1 ? true : false}
           onClick={() => dispatch(pageDecrement())}
         >
           Prev
         </PaginationButton>
-        <PaginationButton 
-        sx={{bgcolor: themeState.main, color: themeState.contrastText}}
+        <PaginationButton
+          sx={{ bgcolor: themeState.main, color: themeState.contrastText }}
           onClick={() =>
-            page === data.data.info.pages
+            pageState === data.data.info.pages
               ? dispatch(pageReset())
               : dispatch(pageIncrement())
           }
