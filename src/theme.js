@@ -24,10 +24,10 @@ export const theme = createTheme({
       contrastText: "#9a9a9a",
     },
     secondary: {
-      main:"rgb(245, 245, 245)",
+      main: "rgb(245, 245, 245)",
       dark: "white",
-      light:"rgb(76, 76, 76)",
-      contrastText:"rgb(148, 148, 148)",
+      light: "rgb(76, 76, 76)",
+      contrastText: "rgb(148, 148, 148)",
     },
   },
 });

@@ -1,10 +1,12 @@
 import React from "react";
+import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router";
-import { store } from "./features/index";
-import { Provider } from "react-redux";
-import { persistor } from "./features";
 import { PersistGate } from "redux-persist/integration/react";
+
+import { persistor } from "./features";
+
+import { store } from "./features/index";
 
 import { App } from "./App";
 

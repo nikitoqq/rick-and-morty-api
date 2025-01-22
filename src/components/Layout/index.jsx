@@ -14,8 +14,8 @@ export const Layout = () => {
       <Main>
         <Routes>
           <Route index element={<Home />} />
-          <Route path={"/Character/:id"} element={<Character />} />
-          <Route path="/Setting" element={<Setting />} />
+          <Route path={"/character/:id"} element={<Character />} />
+          <Route path="/setting" element={<Setting />} />
         </Routes>
       </Main>
     </>

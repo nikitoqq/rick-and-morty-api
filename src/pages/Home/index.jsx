@@ -1,57 +1,43 @@
 import { useQuery } from "react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { Card } from "../../components/Card";
+import { Loader } from "../../components/Loader";
+
+import { OfflinePage } from "../OfflinePage";
+import { AppFooter } from "../../components/AppFooter";
+
+import { getAllCharacter } from "../../utils/data";
+import { isOffline } from "../../utils/utils";
 
 import { BoxStyled } from "./style";
-import { PaginationBox, PaginationButton } from "../../components/Card/style";
-import { getAllCharacter } from "../../utils/data";
-import { pageDecrement, pageIncrement, pageReset } from "../../features/page";
 
 export const Home = () => {
-  const pageState = useSelector((state) => state.otherReducer.page.page);
-  const filterState = useSelector((state) => state.otherReducer.filter.filter);
-  const themeState = useSelector((state) => state.persistedReducer.themes.themes);
-  const dispatch = useDispatch();
+
+  const [pageState, filterState] = [
+    useSelector((state) => state.otherReducer.page.page),
+    useSelector((state) => state.otherReducer.filter.filter),
+  ];
+
   const { data, isLoading } = useQuery(
-    [
-      "character",
-      pageState,
-      filterState,
-    ],
+    ["character", pageState, filterState],
     () => getAllCharacter(pageState, filterState)
   );
 
   if (isLoading) {
-    return <div>Data is loading...</div>;
+    return <Loader />;
   }
 
   const characterMap = data.data.results.map((character) => (
     <Card key={character.id} character={character} />
   ));
 
-  return (
+  return isOffline() ? (
+    <OfflinePage />
+  ) : (
     <BoxStyled>
       {characterMap}
-      <PaginationBox>
-        <PaginationButton
-          sx={{ bgcolor: themeState.main, color: themeState.contrastText }}
-          disabled={pageState === 1 ? true : false}
-          onClick={() => dispatch(pageDecrement())}
-        >
-          Prev
-        </PaginationButton>
-        <PaginationButton
-          sx={{ bgcolor: themeState.main, color: themeState.contrastText }}
-          onClick={() =>
-            pageState === data.data.info.pages
-              ? dispatch(pageReset())
-              : dispatch(pageIncrement())
-          }
-        >
-          Next
-        </PaginationButton>
-      </PaginationBox>
+      <AppFooter data={data}/>
     </BoxStyled>
   );
 };

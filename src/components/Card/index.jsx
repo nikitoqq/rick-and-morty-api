@@ -1,4 +1,11 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "react-query";
+
+import { Loader } from "../Loader";
+
+import { setCharacterPage } from "../../features/characterPage";
+
+import { statusColor } from "../../utils/utils";
 import { getFirstEpisode } from "../../utils/data";
 
 import {
@@ -13,71 +20,66 @@ import {
   StatusBox,
   ImageWrapper,
 } from "./style";
-import { useDispatch, useSelector } from "react-redux";
-import { statusColor } from "../../utils/utils";
-import { setCharacterPage } from "../../features/characterPage";
 
 export const Card = ({ character }) => {
+  const dispatch = useDispatch();
+
+  const [themeState, characterPage] = [
+    useSelector((state) => state.persistedReducer.themes.themes),
+    useSelector((state) => state.persistedReducer.characterPage.characterPage),
+  ];
+
   const { data, isLoading } = useQuery(["Seen", character], () =>
     getFirstEpisode(character.episode[0])
   );
 
-  const dispatch = useDispatch();
-
-  const themeState = useSelector(
-    (state) => state.persistedReducer.themes.themes
-  );
-
-  const characterPage = useSelector(
-    (state) => state.persistedReducer.characterPage.characterPage
-  );
-
   if (isLoading) {
-    return <></>;
+    return <Loader />;
   }
 
-  const checkLocal = () => {
-    console.log(
-      characterPage.findIndex((localPage) => localPage.id === character.id)
-    );
-    console.log(character);
-    if (
-      characterPage.findIndex((localPage) => localPage.id === character.id) ===
-      -1
-    ) {
-      dispatch(setCharacterPage(character));
-    }
+  const styled = {
+    backgroundColor: themeState.main,
+    colorLight: themeState.light,
+    colorContrast: themeState.contrastText,
   };
 
+  const checkLocal = () =>
+    characterPage.findIndex((localPage) => localPage.id === character.id) === -1
+      ? dispatch(setCharacterPage(character))
+      : null;
+
   return (
-    <CharacterCard sx={{ backgroundColor: themeState.main }} key={character.id}>
+    <CharacterCard
+      sx={{ backgroundColor: styled.backgroundColor }}
+      key={character.id}
+    >
       <ImageWrapper>
         <Image image={character.image} title={`${character.name} image`} />
       </ImageWrapper>
       <CharacterContent>
         <CharacterLinkName
           onClick={checkLocal}
-          sx={{ color: themeState.light }}
-          to={`/Character/${character.id}`}
+          sx={{ color: styled.colorLight }}
+          to={`/character/${character.id}`}
         >
           {character.name}
         </CharacterLinkName>
         <StatusBox>
           <Circle sx={() => statusColor(character.status)} />
-          <CharacterTypographyStatus color={themeState.light}>
+          <CharacterTypographyStatus color={styled.colorLight}>
             {character.status}-{character.species}
           </CharacterTypographyStatus>
         </StatusBox>
-        <CharacterTypography color={themeState.contrastText}>
+        <CharacterTypography color={styled.colorContrast}>
           Last known location:
         </CharacterTypography>
-        <CharacterLocation color={themeState.light}>
+        <CharacterLocation color={styled.colorLight}>
           {character.location.name}
         </CharacterLocation>
-        <CharacterTypography color={themeState.contrastText}>
+        <CharacterTypography color={styled.colorContrast}>
           First seen in:
         </CharacterTypography>
-        <CharacterLocation color={themeState.light}>
+        <CharacterLocation color={styled.colorLight}>
           {data.data.name}
         </CharacterLocation>
       </CharacterContent>

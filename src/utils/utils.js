@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export const statusColor = (status) => {
   if (status === "Alive") {
     return { backgroundColor: "#55cc44" };
@@ -24,13 +22,8 @@ export const filterData = [
 export const GetFullDate = (date) =>
   `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
 
-export const headerLink = ["Home", "Setting"];
+export const isOffline = () => !navigator.onLine;
 
-export const isOnline = async () => {
-  try {
-    await axios("hhtps://google.com");
-    return true;
-  } catch {
-    return false;
-  }
-};
+export const update = () => window.location.reload();
+
+export const headerLink = ["home", "setting"];

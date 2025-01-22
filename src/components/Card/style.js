@@ -5,7 +5,6 @@ import {
   CardMedia,
   CardContent,
   Box,
-  Button,
 } from "@mui/material";
 import { NavLink } from "react-router";
 
@@ -33,7 +32,7 @@ export const CharacterLocation = styled(Typography)`
 
 export const CharacterLinkName = styled(NavLink)`
   text-decoration: none;
-  font-size: 1.6rem;
+  font-size: 1rem;
   font-weight: 800;
   line-height: 25px;
   margin-bottom: 4px;
@@ -74,21 +73,4 @@ export const StatusBox = styled(Box)`
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
-
-export const PaginationBox = styled(Box)`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 40px;
-  margin-top: 20px;
-  margin-bottom: 40px;
-`;
-
-export const PaginationButton = styled(Button)`
-  width: 80px;
-  height: 100%;
-  background-color: #9e9e9e;
-  border-radius: 0.5rem;
-  margin: 0px 20px;
 `;

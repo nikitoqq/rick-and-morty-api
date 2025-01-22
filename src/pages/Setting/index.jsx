@@ -1,18 +1,26 @@
+import { useDispatch, useSelector } from "react-redux";
+
+import { changeSettingInput } from "../../features/settingInput";
+import { changeTheme } from "../../features/theme";
+
+import { OfflinePage } from "../OfflinePage";
+
+import { isOffline } from "../../utils/utils";
+
 import { Switch } from "@mui/material";
 import { SettingMainBox, SettingMainRowBox, SettingTypography } from "./styled";
-import { useDispatch, useSelector } from "react-redux";
-import { changeTheme } from "../../features/theme";
 import { theme } from "../../theme";
-import { changeSettingInput } from "../../features/settingInput";
 
 export const Setting = () => {
-  const themeState = useSelector(
-    (state) => state.persistedReducer.themes.themes
-  );
-  const settingInput = useSelector(
-    (state) => state.persistedReducer.settingInput.settingInput
-  );
   const dispatch = useDispatch();
+  const [themeState, settingInput] = [
+    useSelector((state) => state.persistedReducer.themes.themes),
+    useSelector((state) => state.persistedReducer.settingInput.settingInput),
+  ];
+
+  const styled = {
+    colorLight: themeState.light,
+  };
 
   const change = (e) => {
     dispatch(
@@ -25,10 +33,12 @@ export const Setting = () => {
     dispatch(changeSettingInput());
   };
 
-  return (
+  return isOffline() ? (
+    <OfflinePage />
+  ) : (
     <SettingMainBox>
       <SettingMainRowBox>
-        <SettingTypography color={themeState.light}>
+        <SettingTypography color={styled.colorLight}>
           Change Theme
         </SettingTypography>
         <Switch checked={settingInput} onChange={change} />

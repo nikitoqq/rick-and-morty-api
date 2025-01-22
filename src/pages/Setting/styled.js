@@ -1,4 +1,4 @@
- import { Box, styled, Typography } from "@mui/material";
+import { Box, styled, Typography } from "@mui/material";
 
 export const SettingMainBox = styled(Box)`
   display: flex;
@@ -25,5 +25,5 @@ export const SettingMainRowBox = styled(Box)`
 `;
 
 export const SettingTypography = styled(Typography)`
-    font-size: 18px;
+  font-size: 18px;
 `;
