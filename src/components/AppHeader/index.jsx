@@ -27,7 +27,7 @@ export const AppHeader = () => {
     <HeaderLink
       sx={{ color: themeState.light }}
       key={index}
-      to={elem === "home" ? "" : elem}
+      to={elem === "rick-and-morty-api/home" ? "rick-and-morty-api" : elem}
       onClick={elem === "home" ? () => dispatch(pageReset()) : null}
     >
       {elem}

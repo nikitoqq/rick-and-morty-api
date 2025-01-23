@@ -26,4 +26,4 @@ export const isOffline = () => !navigator.onLine;
 
 export const update = () => window.location.reload();
 
-export const headerLink = ["home", "setting"];
+export const headerLink = ["rick-and-morty-api/home", "rick-and-morty-api/setting"];

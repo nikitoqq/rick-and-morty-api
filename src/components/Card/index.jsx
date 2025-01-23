@@ -61,7 +61,7 @@ export const Card = ({ character }) => {
         <CharacterLinkName
           onClick={checkLocal}
           sx={{ color: styled.colorLight }}
-          to={`/character/${character.id}`}
+          to={`rick-and-morty-api/character/${character.id}`}
         >
           {character.name}
         </CharacterLinkName>
