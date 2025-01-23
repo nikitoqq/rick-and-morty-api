@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/static/js/main.e6706d8f.js",
-    "index.html": "/index.html",
-    "main.e6706d8f.js.map": "/static/js/main.e6706d8f.js.map"
+    "main.js": "/rick-and-morty-api/static/js/main.e6706d8f.js",
+    "index.html": "/rick-and-morty-api/index.html",
+    "main.e6706d8f.js.map": "/rick-and-morty-api/static/js/main.e6706d8f.js.map"
   },
   "entrypoints": [
     "static/js/main.e6706d8f.js"
