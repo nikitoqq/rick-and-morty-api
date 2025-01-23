@@ -13,7 +13,6 @@ import { isOffline } from "../../utils/utils";
 import { BoxStyled } from "./style";
 
 export const Home = () => {
-
   const [pageState, filterState] = [
     useSelector((state) => state.otherReducer.page.page),
     useSelector((state) => state.otherReducer.filter.filter),
@@ -25,7 +24,11 @@ export const Home = () => {
   );
 
   if (isLoading) {
-    return <Loader />;
+    return (
+      <BoxStyled>
+        <Loader />
+      </ BoxStyled>
+    );
   }
 
   const characterMap = data.data.results.map((character) => (
@@ -37,7 +40,7 @@ export const Home = () => {
   ) : (
     <BoxStyled>
       {characterMap}
-      <AppFooter data={data}/>
+      <AppFooter data={data} />
     </BoxStyled>
   );
 };

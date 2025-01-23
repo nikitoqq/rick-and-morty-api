@@ -20,6 +20,7 @@ import {
   StatusBox,
   ImageWrapper,
 } from "./style";
+import { Box } from "@mui/material";
 
 export const Card = ({ character }) => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ export const Card = ({ character }) => {
   );
 
   if (isLoading) {
-    return <Loader />;
+    return <Box></Box>
   }
 
   const styled = {

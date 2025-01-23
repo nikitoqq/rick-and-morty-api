@@ -11,5 +11,9 @@ export const Loader = () => {
     colorContrast: themeState.contrastText,
   };
 
-  return <LoadingIcon sx={{ color: styled.colorContrast }} />;
+  return (
+    <>
+      <LoadingIcon sx={{ color: styled.colorContrast }} />{" "}
+    </>
+  );
 };
