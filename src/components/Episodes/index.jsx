@@ -1,20 +1,17 @@
-import { useQuery } from "react-query";
-
-import { Loader } from "../Loader";
+import { useQuery } from "@tanstack/react-query";
 
 import { getEpisode } from "../../utils/data";
 
-import { EpisodesTypography } from "./style";
+import { EpisodesTypography } from "./styled";
 
 export const Episodes = ({ episodes }) => {
-  const { data, isLoading } = useQuery(["Episode", episodes], () => getEpisode(episodes));
+  const { data } = ({
+    queryKey: ["Episode"],
+    queryFn: () => getEpisode(episodes),
+  });
 
-  if (isLoading) {
-    return <Loader/>;
-  }
-
-  const episodeMap = data.map((episode) => (
-    <EpisodesTypography>{`Episode ${episode.id}: ${episode.name} `}</EpisodesTypography>
+  const episodeMap = data?.map((episode) => (
+    <EpisodesTypography key={episode.id}>{`Episode ${episode.id}: ${episode.name} `}</EpisodesTypography>
   ));
   return <>{episodeMap}</>;
 };

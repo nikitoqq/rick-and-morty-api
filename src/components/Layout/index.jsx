@@ -13,9 +13,9 @@ export const Layout = () => {
       <AppHeader />
       <Main>
         <Routes>
-          <Route path="rick-and-morty-api/" element={<Home />} />
-          <Route path={"rick-and-morty-api/character/:id"} element={<Character />} />
-          <Route path="rick-and-morty-api/setting" element={<Setting />} />
+          <Route index element={<Home />} />
+          <Route path={"character/:id"} element={<Character />} />
+          <Route path="setting" element={<Setting />} />
         </Routes>
       </Main>
     </>

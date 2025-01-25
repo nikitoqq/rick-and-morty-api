@@ -19,6 +19,13 @@ export const filterData = [
   },
 ];
 
+export const findLocation = (elem, location) =>
+  elem === "home" && location.pathname === "/"
+    ? "underLine"
+    : elem === "setting" && location.pathname === "/setting"
+    ? "underLine"
+    : "none";
+
 export const GetFullDate = (date) =>
   `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
 
@@ -26,4 +33,4 @@ export const isOffline = () => !navigator.onLine;
 
 export const update = () => window.location.reload();
 
-export const headerLink = ["rick-and-morty-api/home", "rick-and-morty-api/setting"];
+export const headerLink = ["home", "setting"];

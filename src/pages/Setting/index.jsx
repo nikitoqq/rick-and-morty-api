@@ -8,7 +8,7 @@ import { OfflinePage } from "../OfflinePage";
 import { isOffline } from "../../utils/utils";
 
 import { Switch } from "@mui/material";
-import { SettingMainBox, SettingMainRowBox, SettingTypography } from "./styled";
+import { SettingDescpiptionTypography, SettingMainBox, SettingMainRowBox, SettingTypography } from "./styled";
 import { theme } from "../../theme";
 
 export const Setting = () => {
@@ -19,7 +19,8 @@ export const Setting = () => {
   ];
 
   const styled = {
-    colorLight: themeState.light,
+    light: themeState.light,
+    contrast: themeState.contrastText,
   };
 
   const change = (e) => {
@@ -38,9 +39,12 @@ export const Setting = () => {
   ) : (
     <SettingMainBox>
       <SettingMainRowBox>
-        <SettingTypography color={styled.colorLight}>
-          Change Theme
+        <SettingTypography color={styled.light}>
+          Theme: 
         </SettingTypography>
+        <SettingDescpiptionTypography color={styled.contrast}>
+          dark / light
+        </SettingDescpiptionTypography>
         <Switch checked={settingInput} onChange={change} />
       </SettingMainRowBox>
     </SettingMainBox>

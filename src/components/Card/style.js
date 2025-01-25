@@ -1,21 +1,18 @@
-import {
-  Card,
-  styled,
-  Typography,
-  CardMedia,
-  CardContent,
-  Box,
-} from "@mui/material";
 import { NavLink } from "react-router";
 
-export const CharacterCard = styled(Card)`
+import { styled, Typography, CardMedia, CardContent, Box } from "@mui/material";
+
+export const CharacterCard = styled(NavLink)`
   display: flex;
   flex-direction: row;
-  width: 600px;
-  min-height: 220px;
+  text-decoration: none;
+  width: 650px;
+  min-height: 320px;
   margin: 13.5px;
   border-radius: 0.5rem;
-  flex-wrap: wrap;
+  @media (width < 600px) {
+    flex-direction: column;
+  }
 `;
 
 export const CharacterContent = styled(CardContent)`
@@ -30,9 +27,8 @@ export const CharacterLocation = styled(Typography)`
   font-size: 18px;
 `;
 
-export const CharacterLinkName = styled(NavLink)`
-  text-decoration: none;
-  font-size: 1rem;
+export const CharacterName = styled(Typography)`
+  font-size: 1.6rem;
   font-weight: 800;
   line-height: 25px;
   margin-bottom: 4px;
@@ -41,7 +37,7 @@ export const CharacterLinkName = styled(NavLink)`
 export const CharacterTypography = styled(Typography)`
   font-size: 16px;
   font-weight: 500;
-  margin-top: 0.6rem;
+  margin-top: 0.2rem;
 `;
 
 export const CharacterTypographyStatus = styled(Typography)`
@@ -50,23 +46,26 @@ export const CharacterTypographyStatus = styled(Typography)`
 `;
 
 export const Image = styled(CardMedia)`
-  min-height: 220px;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  min-height: 320px;
   background-position: center;
 `;
 
 export const ImageWrapper = styled(Box)`
   flex-grow: 1;
-  min-width: 220px;
+  min-width: 320px;
 `;
 
 export const Circle = styled(Box)`
   width: 0.5rem;
   height: 0.5rem;
+  margin-top: 3px;
   background-color: rgb(85, 204, 68);
   background-color: rgb(214, 61, 46);
   background-color: rgb(158, 158, 158);
   border-radius: 50%;
-  margin-right: 0.375rem;
+  margin-left: 0.375rem;
 `;
 
 export const StatusBox = styled(Box)`

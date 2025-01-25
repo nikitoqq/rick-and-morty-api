@@ -29,8 +29,10 @@ export const Filter = ({ filterData, filterDisplay }) => {
     filter.data.map((elem) => (
       <FilterLabels
         key={elem}
+        sx={{color: styled.colorLight}}
         control={
           <Radio
+          sx={{color: styled.colorLight, '&.Mui-checked': {color: styled.colorLight}}}
             key={elem}
             onClick={() => setState(filter.name, elem === "none" ? "" : elem)}
             value={elem}

@@ -1,3 +1,14 @@
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router";
+import { useSelector } from "react-redux";
+
+import { OfflinePage } from "../OfflinePage";
+
+import { LoaderCharacter } from "../../components/LoaderCharacter";
+
+import { getCharacterById } from "../../utils/data";
+import { GetFullDate, isOffline } from "../../utils/utils";
+
 import { Box } from "@mui/material";
 import {
   CharacterAboutBox,
@@ -10,20 +21,15 @@ import {
   CharacterCreatedInformationDescription,
   Image,
   ImageWrapper,
-} from "./style";
-import { useQuery } from "react-query";
-import { getCharacterById } from "../../utils/data";
-import { useParams } from "react-router";
-import { Episodes } from "../../components/Episodes";
-import { GetFullDate, isOffline } from "../../utils/utils";
-import { useSelector } from "react-redux";
-import { OfflinePage } from "../OfflinePage";
-import { Loader } from "../../components/Loader";
+} from "./styled";
 
 export const Character = () => {
-  const params = useParams();
+  const params = useParams().id;
 
-  const { data, isLoading } = useQuery("characterId", () => getCharacterById(params.id));
+  const { data, isLoading } = useQuery({
+    queryKey: ["characterId", params],
+    queryFn: () => getCharacterById(params),
+  });
 
   const themeState = useSelector(
     (state) => state.persistedReducer.themes.themes
@@ -32,16 +38,24 @@ export const Character = () => {
     (state) => state.persistedReducer.characterPage.characterPage
   );
 
-  if(isLoading){
-    return <Loader/>
+  if (isLoading) {
+    return <LoaderCharacter />;
   }
+
+  const styled = {
+    light: themeState.light,
+  };
 
   const characters =
     characterPage.find((character) => character.id === +params.id) !== undefined
       ? characterPage.find((character) => character.id === +params.id)
-      : data.data;
+      : data[0];
 
-  const created = GetFullDate(new Date(characters?.created));
+  const episodes = data[1].map((episode) => (
+    <CharacterDescription
+      key={episode.id}
+    >{`Episode ${episode.id}: ${episode.name}`}</CharacterDescription>
+  ));
 
   return isOffline() && characters === undefined ? (
     <OfflinePage />
@@ -49,40 +63,37 @@ export const Character = () => {
     <CharacterBox>
       <CharacterFlexBox>
         <ImageWrapper>
-          <Image
-            image={characters.image}
-            title={`${characters.name} image`}
-          />
+          <Image image={characters.image} title={`${characters.name} image`} />
         </ImageWrapper>
         <CharacterAboutBox>
           <Box>
-            <CharacterName color={themeState.light}>
+            <CharacterName color={styled.light}>
               {characters.name}
             </CharacterName>
-            <CharacterDescription color={themeState.light}>
+            <CharacterDescription color={styled.light}>
               Status: {characters.status}
             </CharacterDescription>
-            <CharacterDescription color={themeState.light}>
-              Type: {characters.type}
+            <CharacterDescription color={styled.light}>
+              {"Type:" + characters.type !== "" ? characters.type : ""}
             </CharacterDescription>
-            <CharacterDescription color={themeState.light}>
+            <CharacterDescription color={styled.light}>
               Gender: {characters.gender}
             </CharacterDescription>
           </Box>
         </CharacterAboutBox>
       </CharacterFlexBox>
       <CharacterOtherInformation>
-        <CharacterOtherInformationDescription color={themeState.light}>
+        <CharacterOtherInformationDescription color={styled.light}>
           Origin name: {characters.origin.name}
         </CharacterOtherInformationDescription>
-        <CharacterOtherInformationDescription color={themeState.light}>
+        <CharacterOtherInformationDescription color={styled.light}>
           Location: {characters.location.name}
         </CharacterOtherInformationDescription>
-        <CharacterOtherInformationDescription color={themeState.light}>
-          Episodes: <Episodes episodes={characters?.episode} />
+        <CharacterOtherInformationDescription color={styled.light}>
+          Episodes <Box>{episodes}</Box>
         </CharacterOtherInformationDescription>
-        <CharacterCreatedInformationDescription color={themeState.light}>
-          Created: {created}
+        <CharacterCreatedInformationDescription color={styled.light}>
+          Created: {() => GetFullDate(new Date(characters.created))}
         </CharacterCreatedInformationDescription>
       </CharacterOtherInformation>
     </CharacterBox>

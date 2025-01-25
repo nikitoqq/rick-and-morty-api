@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useQuery } from "react-query";
-
-import { Loader } from "../Loader";
+import { useQuery } from "@tanstack/react-query";
 
 import { setCharacterPage } from "../../features/characterPage";
 
@@ -10,7 +8,7 @@ import { getFirstEpisode } from "../../utils/data";
 
 import {
   CharacterCard,
-  CharacterLinkName,
+  CharacterName,
   CharacterTypography,
   CharacterTypographyStatus,
   Image,
@@ -30,18 +28,19 @@ export const Card = ({ character }) => {
     useSelector((state) => state.persistedReducer.characterPage.characterPage),
   ];
 
-  const { data, isLoading } = useQuery(["Seen", character], () =>
-    getFirstEpisode(character.episode[0])
-  );
+  const { data, isLoading } = useQuery({
+    queryKey: ["Seen", character],
+    queryFn: () => getFirstEpisode(character.episode[0]),
+  });
 
   if (isLoading) {
-    return <Box></Box>
+    return <Box></Box>;
   }
 
   const styled = {
-    backgroundColor: themeState.main,
-    colorLight: themeState.light,
-    colorContrast: themeState.contrastText,
+    main: themeState.main,
+    light: themeState.light,
+    contrast: themeState.contrastText,
   };
 
   const checkLocal = () =>
@@ -51,36 +50,47 @@ export const Card = ({ character }) => {
 
   return (
     <CharacterCard
-      sx={{ backgroundColor: styled.backgroundColor }}
+    media=""
+      to={`character/${character.id}`}
+      onClick={checkLocal}
+      sx={{
+        backgroundColor: styled.main,
+        ":hover": { backgroundColor: "rgba(177, 177, 177, 0.2)" },
+      }}
       key={character.id}
     >
       <ImageWrapper>
         <Image image={character.image} title={`${character.name} image`} />
       </ImageWrapper>
       <CharacterContent>
-        <CharacterLinkName
-          onClick={checkLocal}
-          sx={{ color: styled.colorLight }}
-          to={`rick-and-morty-api/character/${character.id}`}
-        >
+        <CharacterName sx={{ color: styled.light }}>
           {character.name}
-        </CharacterLinkName>
+        </CharacterName>
+        <CharacterTypography color={styled.contrast}>
+          status:
+        </CharacterTypography>
         <StatusBox>
-          <Circle sx={() => statusColor(character.status)} />
-          <CharacterTypographyStatus color={styled.colorLight}>
-            {character.status}-{character.species}
+          <CharacterTypographyStatus color={styled.light}>
+            {character.status}
           </CharacterTypographyStatus>
+          <Circle sx={() => statusColor(character.status)} />
         </StatusBox>
-        <CharacterTypography color={styled.colorContrast}>
+        <CharacterTypography color={styled.contrast}>
+          species:
+        </CharacterTypography>
+        <CharacterTypographyStatus color={styled.light}>
+          {character.species}
+        </CharacterTypographyStatus>
+        <CharacterTypography color={styled.contrast}>
           Last known location:
         </CharacterTypography>
-        <CharacterLocation color={styled.colorLight}>
+        <CharacterLocation color={styled.light}>
           {character.location.name}
         </CharacterLocation>
-        <CharacterTypography color={styled.colorContrast}>
+        <CharacterTypography color={styled.contrast}>
           First seen in:
         </CharacterTypography>
-        <CharacterLocation color={styled.colorLight}>
+        <CharacterLocation color={styled.light}>
           {data.data.name}
         </CharacterLocation>
       </CharacterContent>

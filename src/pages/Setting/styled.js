@@ -27,3 +27,7 @@ export const SettingMainRowBox = styled(Box)`
 export const SettingTypography = styled(Typography)`
   font-size: 18px;
 `;
+
+export const SettingDescpiptionTypography = styled(Typography)`
+  font-size: 17px;
+`;

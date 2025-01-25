@@ -1,0 +1,63 @@
+import { Box, Skeleton, styled } from "@mui/material";
+
+export const CharacterBox = styled(Box)`
+  max-width: 1440px;
+  margin: 100px auto 100px auto;
+`;
+
+export const CharacterFlexBox = styled(Box)`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+`;
+
+export const Image = styled(Skeleton)`
+  width: 100%;
+  height: 100%;
+`;
+
+export const ImageWrapper = styled(Box)`
+  height: 400px;
+  width: 400px;
+  margin: 0px 20px 40px 20px;
+`;
+
+export const CharacterAboutBox = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px 20px 40px 20px;
+`;
+
+export const CharacterDescription = styled(Skeleton)`
+  width: 400px;
+  font-size: 30px;
+  font-weight: 600;
+`;
+
+export const CharacterName = styled(Skeleton)`
+  width: 300px;
+  font-size: 64px;
+  line-height: 70px;
+  margin-bottom: 20px;
+`;
+
+export const CharacterOtherInformation = styled(Box)`
+  display: flex;
+  font-size: 46px;
+  flex-direction: column;
+`;
+
+export const CharacterOtherInformationDescription = styled(Skeleton)`
+  margin-left: 20px;
+  font-size: 46px;
+  width: 500px;
+`;
+
+export const CharacterCreatedInformationDescription = styled(Skeleton)`
+  font-size: 26px;
+  margin-left: 20px;
+  width: 300px;
+`;
